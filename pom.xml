@@ -20,6 +20,8 @@
         <hibernate.version>4.3.6.Final</hibernate.version>
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
         <buildNumber>${maven.build.timestamp}</buildNumber>
+        
+        
     </properties>
 
 
