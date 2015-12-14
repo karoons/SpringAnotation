@@ -160,3 +160,5 @@
     </build>
 
 </project>
+
+<!--mvn jetty:run-->
