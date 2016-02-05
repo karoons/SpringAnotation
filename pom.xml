@@ -15,17 +15,17 @@
         <slf4j.version>1.5.5</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
         <java.version>7</java.version>
+        <jdk.version>1.7</jdk.version>
         <spring.version>4.2.1.RELEASE</spring.version>
         <spring.data.jpa>1.9.1.RELEASE</spring.data.jpa>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
         <buildNumber>${maven.build.timestamp}</buildNumber>
+        <servletapi.version>3.1.0</servletapi.version>
         
         
     </properties>
 
-
-    
     <dependencies>
         <!--Spring Framework-->
         <dependency>
@@ -50,7 +50,7 @@
             <scope>test</scope>
         </dependency>        
         <!--Java Framework-->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -77,6 +77,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        
         <!--Database Framework-->
         <!--SqlServer-->
         <dependency>
@@ -84,11 +85,20 @@
             <artifactId>jtds</artifactId>
             <version>1.3.1</version>
         </dependency>
+        
         <!-- PostgrestSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1200-jdbc41</version>
+        </dependency>
+        
+        <!-- compile only, deployed container will provide this -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servletapi.version}</version>
+            <scope>provided</scope>
         </dependency>
         
         
@@ -109,11 +119,13 @@
                 </configuration>
             </plugin>
             
+            <!--mvn clean compile test -Djetty.port=8015 jetty:run-->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.4.v20120524</version>
                 <configuration>
+                    <scanintervalseconds>2</scanintervalseconds>
                     <webAppConfig>
                         <contextPath>/${project.name}</contextPath>
                     </webAppConfig>
